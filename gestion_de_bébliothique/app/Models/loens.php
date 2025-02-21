@@ -9,11 +9,4 @@ class loens extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'title',
-        'author',
-        'genre',
-        'photo',
-        'stock',
-    ];
 }

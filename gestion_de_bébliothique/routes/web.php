@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\authController;
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -24,4 +25,6 @@ Route::get('/home',[authController::class,'home']);
 Route::post('registre',[RegisterController::class,'registre'])->name('register');
 Route::post('/login',[loginController::class,'login'])->name('login');
 Route::get('/login',[loginController::class,'login'])->name('login');
+Route::get('/admin',[BookController::class,'index']);
+
 
