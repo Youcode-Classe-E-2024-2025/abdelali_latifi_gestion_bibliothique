@@ -26,6 +26,8 @@ Route::get('/signup', [AuthController::class, 'showSignUp']);
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/signup', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
 // crude
 Route::get('/dashboard', [BookController::class, 'index'])->name('dashboard');
 Route::get('/books/create', [BookController::class, 'create']);

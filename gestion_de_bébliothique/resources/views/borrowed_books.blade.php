@@ -15,7 +15,7 @@
             <nav>
                 <ul class="flex space-x-6">
                     <li><a href="/" class="text-gray-300 hover:text-purple-400 transition">Home</a></li>
-                    <li><a href="/borrow" class="text-gray-300 hover:text-purple-400 transition">Available Books</a></li>
+                    <li><a href="/emprunt" class="text-gray-300 hover:text-purple-400 transition">Available Books</a></li>
                 </ul>
             </nav>
         </div>
