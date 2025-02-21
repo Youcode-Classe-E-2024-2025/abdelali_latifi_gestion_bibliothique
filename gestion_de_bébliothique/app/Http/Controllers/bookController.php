@@ -121,7 +121,18 @@ public function showGeusts()
         return redirect()->route('client.dashboard')->with('success', 'Livre emprunté avec succès.');
     }
 
-   
+    public function showBorrowedBooks()
+    {
+        $loans = Loans::where('user_id', Auth::id())->whereNull('returned_at')->get();
+    
+        if ($loans->isEmpty()) {
+            return view('borrowed_books', ['message' => 'Vous n\'avez aucun livre emprunté.']);
+        }
+    
+        $books = $loans->map(fn($loan) => $loan->book)->filter();
+    
+        return view('borrowed_books', compact('books'));
+    }
     
 
  
