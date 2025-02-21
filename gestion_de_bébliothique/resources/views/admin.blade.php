@@ -7,43 +7,51 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-black text-white">
 
     <!-- Barre de navigation -->
-    <nav class="bg-white shadow-md p-4">
+    <nav class="bg-purple-800 shadow-md p-4">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <h1 class="text-xl font-bold text-gray-700">📚 Book Dashboard</h1>
-            <button onclick="openModal()" class="bg-blue-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-600 transition">
-                + Ajouter un Livre
-            </button>
+            <h1 class="text-xl font-bold text-white">Dashboard</h1>
+            <div class="flex items-center space-x-4">
+                <button onclick="openModal()" class="bg-purple-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-purple-600 transition">
+                    + Ajouter un Livre
+                </button>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-red-600 transition">
+                        Logout
+                    </button>
+                </form>
+            </div>
         </div>
     </nav>
 
     <!-- Contenu principal -->
     <div class="max-w-6xl mx-auto mt-6">
-        <h2 class="text-2xl font-bold text-gray-700 mb-4">📖 Liste des Livres</h2>
+        <h2 class="text-2xl font-bold text-white mb-4">📖 Liste des Livres</h2>
 
         <!-- Affichage des livres -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             @foreach ($books as $book)
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="bg-gray-900 rounded-lg shadow-md overflow-hidden">
                     @if ($book->photo)
                         <img src="{{ asset('storage/' . $book->photo) }}" alt="Couverture du livre" class="w-full h-40 object-cover">
                     @else
-                        <div class="w-full h-40 bg-gray-300 flex items-center justify-center text-gray-500">Pas d'image</div>
+                        <div class="w-full h-40 bg-gray-700 flex items-center justify-center text-gray-400">Pas d'image</div>
                     @endif
 
                     <div class="p-4">
-                        <h3 class="text-lg font-semibold text-gray-800">{{ $book->title }}</h3>
-                        <p class="text-gray-600 text-sm">Auteur: <span class="font-medium">{{ $book->author }}</span></p>
-                        <p class="text-gray-600 text-sm">Genre: <span class="font-medium">{{ $book->genre }}</span></p>
-                        <p class="text-gray-600 text-sm">Stock: <span class="font-medium">{{ $book->stock }}</span></p>
+                        <h3 class="text-lg font-semibold text-white">{{ $book->title }}</h3>
+                        <p class="text-gray-300 text-sm">Auteur: <span class="font-medium">{{ $book->author }}</span></p>
+                        <p class="text-gray-300 text-sm">Genre: <span class="font-medium">{{ $book->genre }}</span></p>
+                        <p class="text-gray-300 text-sm">Stock: <span class="font-medium">{{ $book->stock }}</span></p>
 
                         <div class="mt-4 flex space-x-2">
-                        <a href="#"onclick="openEditModal({{ $book->id }}, '{{ $book->title }}', '{{ $book->author }}', '{{ $book->genre }}', '{{ $book->stock }}', '{{ asset('storage/' . $book->photo) }}')" 
-                             class="bg-yellow-500 text-white px-3 py-1 rounded-md text-sm hover:bg-yellow-600 transition">
-                             Modifier
-                        </a>
+                            <a href="#" onclick="openEditModal({{ $book->id }}, '{{ $book->title }}', '{{ $book->author }}', '{{ $book->genre }}', '{{ $book->stock }}', '{{ asset('storage/' . $book->photo) }}')" 
+                               class="bg-yellow-500 text-white px-3 py-1 rounded-md text-sm hover:bg-yellow-600 transition">
+                               Modifier
+                            </a>
 
                             <form action="{{ route('books.destroy', $book->id) }}" method="POST">
                                 @csrf
@@ -57,7 +65,7 @@
 
         <!-- Message si aucun livre -->
         @if ($books->isEmpty())
-            <p class="text-center text-gray-500 mt-6">Aucun livre trouvé. Ajoutez un nouveau livre !</p>
+            <p class="text-center text-gray-400 mt-6">Aucun livre trouvé. Ajoutez un nouveau livre !</p>
         @endif
     </div>
 
