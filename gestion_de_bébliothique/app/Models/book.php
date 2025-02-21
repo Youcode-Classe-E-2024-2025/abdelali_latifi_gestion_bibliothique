@@ -15,4 +15,12 @@ class book extends Model
         'photo',
         'stock',
     ];
+
+    public function loans()
+{
+    return $this->hasMany(Loans::class, 'book_id');
+}
+
+
+    
 }

@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Book;
+use App\Models\Loans;
 use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
@@ -15,7 +16,20 @@ class BookController extends Controller
         return view('admin', compact('books'));
     }
    
-    // Enregistrer un nouveau livre
+    public function showClientBooks()
+{
+    $books = Book::all(); 
+    return view('emprunt', compact('books'));
+}
+
+public function showGeusts()
+{
+    $books = Book::all(); 
+    return view('welcome', compact('books'));
+}
+
+
+    // ajouter un livre
     public function store(Request $request)
     {
         $request->validate([
@@ -40,7 +54,7 @@ class BookController extends Controller
         return redirect()->route('dashboard')->with('success', 'Livre ajouté avec succès !');
     }
 
-    // Mettre à jour un livre
+    // update un livre
     public function update(Request $request, Book $book)
     {
         $request->validate([
@@ -79,4 +93,38 @@ class BookController extends Controller
         $book->delete();
         return redirect()->route('dashboard')->with('success', 'Livre ajouté avec succès !');
     }
+
+    public function storeLoan(Request $request)
+    {
+        $request->validate([
+            'book_id' => 'required|exists:books,id',
+        ]);
+
+        // Vérifier si l'utilisateur a déjà emprunté ce livre et s'il ne l'a pas encore retourné
+        $existingLoan = Loans::where('user_id', Auth::id())
+            ->where('book_id', $request->book_id)
+            ->whereNull('returned_at') // Vérifie qu'il n'a pas encore retourné ce livre
+            ->first();
+
+        if ($existingLoan) {
+            // Si un emprunt actif existe, afficher un message d'erreur
+            return redirect()->route('client.dashboard')->with('error', 'Vous avez déjà emprunté ce livre.');
+        }
+
+        // Sinon, créer un nouvel emprunt
+        Loans::create([
+            'user_id' => Auth::id(),
+            'book_id' => $request->book_id,
+            'borrowed_at' => now(),
+        ]);
+
+        return redirect()->route('client.dashboard')->with('success', 'Livre emprunté avec succès.');
+    }
+
+   
+    
+
+ 
 }
+
+
