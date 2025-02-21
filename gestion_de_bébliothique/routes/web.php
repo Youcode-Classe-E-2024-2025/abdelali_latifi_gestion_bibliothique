@@ -35,10 +35,8 @@ Route::post('/books', [BookController::class, 'store']);
 Route::put('/books/{book}', [BookController::class, 'update']);
 Route::post('/books/{book}', [BookController::class, 'destroy'])->name('books.destroy');
 
-// Route pour la redirection vers la page d'emprunt
+// emprunt
 Route::get('/emprunt', [BookController::class, 'showClientBooks'])->name('client.dashboard');
-
-// Route pour l'emprunt
 Route::post('/loans', [BookController::class, 'storeLoan'])->name('loans.store');
 
 Route::get('/', [BookController::class, 'showGeusts']);

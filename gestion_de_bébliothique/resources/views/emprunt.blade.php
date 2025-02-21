@@ -20,7 +20,7 @@
                 </ul>
                 <form action="{{ route('logout') }}" method="POST" class="ml-6">
                     @csrf
-                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-red-600 transition">
+                    <button type="submit" class=" text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-red-600 transition">
                         Logout
                     </button>
                 </form>
