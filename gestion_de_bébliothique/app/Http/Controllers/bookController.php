@@ -40,7 +40,34 @@ class BookController extends Controller
         return redirect()->route('dashboard')->with('success', 'Livre ajouté avec succès !');
     }
 
-   
+    // Mettre à jour un livre
+    public function update(Request $request, Book $book)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'author' => 'required|string|max:255',
+            'genre' => 'required|string|max:255',
+            'photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'stock' => 'required|integer|min:0',
+        ]);
+    
+        if ($request->hasFile('photo')) {
+            if ($book->photo) {
+                Storage::disk('public')->delete($book->photo);
+            }
+            $book->photo = $request->file('photo')->store('books', 'public');
+        }
+    
+        $book->update([
+            'title' => $request->title,
+            'author' => $request->author,
+            'genre' => $request->genre,
+            'stock' => $request->stock,
+            'photo' => $book->photo,
+        ]);
+    
+        return redirect()->route('dashboard')->with('success', 'Livre mis à jour avec succès !');
+    }
     
     // Supprimer un livre
     public function destroy(Book $book)
