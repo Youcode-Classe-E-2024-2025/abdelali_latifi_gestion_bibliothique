@@ -83,9 +83,9 @@ public function register(Request $request)
     private function redirectUser($user)
     {
         if ($user->role === 'admin') {
-            return redirect()->route('dashboard')->with('success', 'Bienvenue Admin !');
+            return redirect()->route('dashboard');
         }
 
-        return redirect()->route('client.dashboard')->with('success', 'Bienvenue Client !');
+        return redirect()->route('client.dashboard');
     }
 }

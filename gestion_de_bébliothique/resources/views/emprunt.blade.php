@@ -33,17 +33,6 @@
         <h2 class="text-4xl font-bold">Welcome to the Library</h2>
         <p class="mt-2 text-lg">Discover and borrow your favorite books with just a few clicks.</p>
     </section>
-
-    <!-- Alert Messages -->
-    @if(session('error') || session('success'))
-        <div class="max-w-3xl mx-auto mt-6">
-            <div class="p-4 rounded-md text-white text-center shadow-md 
-                {{ session('error') ? 'bg-red-500' : 'bg-green-500' }}">
-                {{ session('error') ?? session('success') }}
-            </div>
-        </div>
-    @endif
-
     <!-- Available Books -->
     <main class="max-w-6xl mx-auto py-12 px-6">
         <h2 class="text-3xl font-bold text-purple-400 mb-6 text-center">Available Books</h2>
