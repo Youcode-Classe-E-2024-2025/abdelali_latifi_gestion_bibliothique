@@ -12,4 +12,8 @@ class authController extends Controller
     public function registre(){
         return view('registre');
     }
+
+    public function home(){
+        return view('home');
+    }
 }
