@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 class loginController extends Controller
 {
+
+
     public function login(Request $request){
 
     $email = $request->email ;
@@ -17,7 +19,7 @@ class loginController extends Controller
     if(Auth::attempt($credentails)){
 
         $request->session()->regenerate();
-        return to_route('login')->with('Success', 'vous étes bien connecté');
+        return redirect('home')->with('Success', 'vous étes bien connecté');
     }else{
 
         return back()->withErrors([

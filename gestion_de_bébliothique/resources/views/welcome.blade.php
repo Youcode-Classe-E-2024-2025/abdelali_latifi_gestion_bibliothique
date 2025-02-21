@@ -8,9 +8,9 @@
 </head>
 <body class="bg-fixed bg-gray-100 min-h-screen">
     <header class="flex justify-between items-center px-6 py-4 bg-white shadow">
-        <h1 class="text-2xl font-extrabold text-gray-800">TASKFLOW</h1>
+        <h1 class="text-2xl font-extrabold text-gray-800">library</h1>
         <div>
-            <a href="{{ route('login') }}" id="sign_up" class="px-4 py-2 text-xl font-bold text-white bg-violet-600 rounded-lg hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-violet-400">
+            <a href="registre" id="sign_up" class="px-4 py-2 text-xl font-bold text-white bg-violet-600 rounded-lg hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-violet-400">
                 Sign Up
             </a>
         </div>
@@ -18,7 +18,6 @@
 
     <section id="FormSignIn" class="flex flex-col items-center w-full max-w-lg mx-auto mt-10 p-6 bg-white shadow rounded-lg">
         <h2 class="text-2xl font-bold mb-4 text-gray-800">Log In</h2>
-
         @if(session('success'))
             <div class="w-full p-3 mb-4 text-green-700 bg-green-200 border border-green-400 rounded-lg">
                 {{ session('success') }}
@@ -31,20 +30,14 @@
                 <label for="email" class="block text-xl font-bold text-gray-700">Name</label>
                 <input id="email" name="email" type="text" placeholder="Enter your name"
                     class="w-full p-2 mt-1 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-violet-500"
-                    required>
-                @error('email')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
+                    >
             </div>
             
             <div>
                 <label for="password" class="block text-xl font-bold text-gray-700">Password</label>
                 <input id="password" name="password" type="password" placeholder="Enter your password"
                     class="w-full p-2 mt-1 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-violet-500"
-                    required>
-                @error('password')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
+                    >
             </div>
 
             @error('login')

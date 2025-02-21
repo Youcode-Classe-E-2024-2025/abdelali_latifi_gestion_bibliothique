@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\authController;
 use App\Http\Controllers\loginController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,13 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-Route::get('/',[authController::class,'index']);
-Route::post('login',[loginController::class,'login'])->name('login');
 
-// Route::get('registre', function () {
-//     return view('registre');
-// });
+Route::get('/',[authController::class,'index']);
+Route::get('/login',[loginController::class,'login'])->name('login');
 Route::get('registre',[authController::class,'registre']);
+Route::post('registre',[RegisterController::class,'registre'])->name('register');
+Route::post('/login',[loginController::class,'login'])->name('login');
+Route::get('/login',[loginController::class,'login'])->name('login');
+
